@@ -7,7 +7,7 @@ from configparser import ConfigParser
 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from  appium import webdriver
+from appium import webdriver
 
 sys.path.append("..")
 from config import appium_config
@@ -56,11 +56,13 @@ class Login(unittest.TestCase):
         call_allow = el_id_click(self.driver, cfg.get("miui","call_allow"))
         laction_only = el_id_click(self.driver,cfg.get("miui", "laction_only"))
         rw_allow = el_id_click(self.driver, cfg.get("miui", "rw_allow"))
-        time.sleep(1)
-        for n in range(5):
-            self.swipe.swipe_left(self.driver)
-        # for i in range(3):
-        #     self.driver.swipe(700, 200, 100, 200, 500)  # 滑屏三次
+        time.sleep(3)
+        # for n in range(5):
+        #     self.swipe.swipe_left(self.driver)
+        for i in range(3):
+            self.driver.swipe(700, 200, 100, 200, 500)  # 滑屏三次
+        time.sleep(3)
+        start_login = el_id_click(self.driver, cfg.get("experience", "start_login"))
 
 
 # texture Testcase
