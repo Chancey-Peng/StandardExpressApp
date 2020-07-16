@@ -8,6 +8,8 @@ import time
 import unittest
 from time import sleep
 from appium import webdriver
+from config import globalparameter as GL
+from .log import log
 
 def wait_time(func):
     def inner(*args):
@@ -18,30 +20,46 @@ def wait_time(func):
     return inner
 
 # element locators: click
+utils_log = log()
 
 def el_id_click(driver,element):
-    return driver.find_element_by_id(element).click()
+    try:
+        return driver.find_element_by_id(element).click()
+    except:
+        utils_log.error(u'找不到元素'+ str(element))
 
 def el_class_click(driver, element):
-    return driver.find_element_by_class_name(element).click()
+    try:
+        return driver.find_element_by_class_name(element).click()
+    except:
+        utils_log.error(u'找不到元素'+ str(element))
 
 
 def el_xpath_click(driver, element):
-    return driver.find_element_by_xpath(element).click()
+    try:
+        return driver.find_element_by_xpath(element).click()
+    except:
+        utils_log.error(u'找不到元素'+ str(element))
 
 
 # action
 def el_send_keys(driver, element, data):
-    return driver.find_element_by_id(element).send_keys(data)
+    try:
+        return driver.find_element_by_id(element).send_keys(data)
+    except:
+        utils_log.error(u'找不到元素'+ str(element))
 
 
 def el_text(driver, element):
-    return driver.find_element_by_id(element).text
+    try:
+        return driver.find_element_by_id(element).text
+    except:
+        utils_log.error(u'找不到元素'+ str(element))
 
 
 @wait_time
 def screenshot(driver):
-    filename = ''.join("../log/" + str(time.localtime()) + ".png")
+    filename = ''.join(GL.log_path + time.strftime('%Y%m%d%H%S', time.localtime()) + ".png")
     return driver.get_screenshot_as_file(filename)
 
 

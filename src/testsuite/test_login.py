@@ -69,6 +69,7 @@ class Login(unittest.TestCase):
         tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
         pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
         login = el_id_click(self.driver, cfg.get("login", "login"))
+        screenshot(self.driver)
 
     # @classmethod
     # def tearDownClass(self):
