@@ -59,7 +59,7 @@ def el_text(driver, element):
 
 @wait_time
 def screenshot(driver):
-    filename = ''.join(GL.log_path + time.strftime('%Y%m%d%H%S', time.localtime()) + ".png")
+    filename = ''.join(GL.img_path + ".png")
     return driver.get_screenshot_as_file(filename)
 
 
