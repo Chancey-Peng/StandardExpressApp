@@ -35,8 +35,8 @@ img_path = project_path+"\\error_img\\"+time.strftime('%Y%m%d%H%S', time.localti
 test_case_path=project_path+"\\src\\testsuite"
 
 
-login_username=''
-login_password=""
+login_username = '13216628864'
+login_password = "a123456"
 
 
 

@@ -9,10 +9,10 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from appium import webdriver
 
-sys.path.append("..")
+# sys.path.append("..")
 from config import appium_config
 from config import globalparameter as GL
-from src.common.utils import el_id_click, el_xpath_click, el_text
+from src.common.utils import el_id_click, el_xpath_click, el_text, el_send_keys
 from src.common.utils import screenshot
 from src.common.utils import MobileSwipe
 
@@ -56,7 +56,7 @@ class Login(unittest.TestCase):
         call_allow = el_id_click(self.driver, cfg.get("miui","call_allow"))
         laction_only = el_id_click(self.driver,cfg.get("miui", "laction_only"))
         rw_allow = el_id_click(self.driver, cfg.get("miui", "rw_allow"))
-        time.sleep(3)
+        time.sleep(5)
         # for n in range(5):
         #     self.swipe.swipe_left(self.driver)
         for i in range(3):
@@ -65,13 +65,25 @@ class Login(unittest.TestCase):
         start_login = el_id_click(self.driver, cfg.get("experience", "start_login"))
 
 
+    def test_start_login(self):
+        tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
+        pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
+        login = el_id_click(self.driver, cfg.get("login", "login"))
+
+    # @classmethod
+    # def tearDownClass(self):
+    #     self.driver.quit()
+        
+
+
 # texture Testcase
 def suite_goods():
     tests = [
-        "test_initial"
+        "test_initial",
+        "test_start_login"
 
     ]
     return unittest.TestSuite(map(Login, tests))
 
 if __name__ == "__main__":
-    unittest.TextTestRunner(verbosity=2).run(suite_goods())
+    unittest.TextTestRunner(verbosity=3).run(suite_goods())
