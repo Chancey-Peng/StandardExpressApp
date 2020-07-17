@@ -15,6 +15,7 @@ from config import globalparameter as GL
 from src.common.utils import el_id_click, el_xpath_click, el_text, el_send_keys
 from src.common.utils import screenshot
 from src.common.utils import MobileSwipe
+from src.common.log import log
 
 # config.ini
 cfg = ConfigParser()
@@ -44,6 +45,7 @@ class Login(unittest.TestCase):
     def setUpClass(self):
         self.driver = appium_config.appium_start()
         self.swipe = MobileSwipe()
+        self.login_log = log()
 
     def test_initial(self):
         """
@@ -73,11 +75,13 @@ class Login(unittest.TestCase):
     def test_login_failure_one(self):
         '''用户密码为空'''
         try:
-            tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
-            pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
-            login = el_id_click(self.driver, cfg.get("login", "login"))
+            # tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
+            # pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
+            # login = el_id_click(self.driver, cfg.get("login", "login"))
+            # self.assertIn('Username is required', el_text(self.driver, ))
+            pass
         except Exception as e:
-            screenshot(self.driver)
+            screenshot(self.driver, u'用户名密码为空')
             raise e
 
     def test_login_failure_two(self):
@@ -97,8 +101,13 @@ class Login(unittest.TestCase):
     def test_login_four(self):
         '''用户名密码错误'''
         try:
+            # tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
+            # pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
+            # login = el_id_click(self.driver, cfg.get("login", "login"))
+            # self.assertIn('Username is required', el_text(self.driver, cfg.get("login", "subscribe_tip")))
             pass
         except Exception as e:
+            screenshot(self.driver, u'用户名密码错误')
             raise e
 
 

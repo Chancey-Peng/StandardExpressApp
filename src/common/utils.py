@@ -9,7 +9,9 @@ import unittest
 from time import sleep
 from appium import webdriver
 from config import globalparameter as GL
-from .log import log
+from src.common import log
+
+utils_log = log.log()
 
 def wait_time(func):
     def inner(*args):
@@ -20,26 +22,24 @@ def wait_time(func):
     return inner
 
 # element locators: click
-utils_log = log()
-
-def el_id_click(driver,element):
+def el_id_click(driver, element):
     try:
         return driver.find_element_by_id(element).click()
     except:
-        utils_log.error(u'找不到元素'+ str(element))
+        utils_log.error(u'找不到元素' + str(element))
 
 def el_class_click(driver, element):
     try:
         return driver.find_element_by_class_name(element).click()
     except:
-        utils_log.error(u'找不到元素'+ str(element))
+        utils_log.error(u'找不到元素' + str(element))
 
 
 def el_xpath_click(driver, element):
     try:
         return driver.find_element_by_xpath(element).click()
     except:
-        utils_log.error(u'找不到元素'+ str(element))
+        utils_log.error(u'找不到元素' + str(element))
 
 
 # action
@@ -47,20 +47,23 @@ def el_send_keys(driver, element, data):
     try:
         return driver.find_element_by_id(element).send_keys(data)
     except:
-        utils_log.error(u'找不到元素'+ str(element))
+        utils_log.error(u'找不到元素' + str(element))
 
 
 def el_text(driver, element):
     try:
         return driver.find_element_by_id(element).text
     except:
-        utils_log.error(u'找不到元素'+ str(element))
+        utils_log.error(u'找不到元素' + str(element))
 
 
 @wait_time
-def screenshot(driver):
-    filename = ''.join(GL.img_path + ".png")
-    return driver.get_screenshot_as_file(filename)
+def screenshot(driver, img_name):
+    try:
+        filename = ''.join(GL.img_path + "_"+ img_name + ".png")
+        return driver.get_screenshot_as_file(filename)
+    except:
+        utils_log.error(u'截图失败：' + img_name)
 
 
 # page element check
