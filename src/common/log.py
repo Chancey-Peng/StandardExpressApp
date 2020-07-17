@@ -13,10 +13,10 @@ class log(object):
 
         logger = logging.getLogger()
         # 定义Handler输出到文件和控制台
-        fh = logging.FileHandler(GL.log_path)
+        fh = logging.FileHandler(GL.log_name, 'a', encoding='utf-8')
         ch = logging.StreamHandler()
         # 定义日志输出格式
-        formater = logging.Formatter("%(asctime)s %(levelname)s %(message)s' ")
+        formater = logging.Formatter("%(asctime)s %(filename)s文件 %(funcName)s函数 %(lineno)d行 %(levelname)s : %(message)s")
         fh.setFormatter(formater)
         ch.setFormatter(formater)
         # 添加Handler
@@ -49,3 +49,7 @@ class log(object):
 
     def error(self, msg):
         self.setMSG('error', msg)
+
+if __name__  == "__main__":
+    uer = log()
+    a = uer.setMSG("warning", "测试日志模块")

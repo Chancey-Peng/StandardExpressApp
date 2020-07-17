@@ -69,7 +69,38 @@ class Login(unittest.TestCase):
         tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
         pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
         login = el_id_click(self.driver, cfg.get("login", "login"))
-        screenshot(self.driver)
+
+    def test_login_failure_one(self):
+        '''用户密码为空'''
+        try:
+            tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
+            pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
+            login = el_id_click(self.driver, cfg.get("login", "login"))
+        except Exception as e:
+            screenshot(self.driver)
+            raise e
+
+    def test_login_failure_two(self):
+        '''用户名为空'''
+        try:
+            pass
+        except Exception as e:
+            raise e
+
+    def test_login_three(self):
+        '''密码为空'''
+        try:
+            pass
+        except Exception as e:
+            raise e
+
+    def test_login_four(self):
+        '''用户名密码错误'''
+        try:
+            pass
+        except Exception as e:
+            raise e
+
 
     # @classmethod
     # def tearDownClass(self):
