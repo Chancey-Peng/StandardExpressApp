@@ -67,6 +67,7 @@ class Login(unittest.TestCase):
         start_login = el_id_click(self.driver, cfg.get("experience", "start_login"))
 
 
+    @unittest.skip("跳过这条测试用例")
     def test_start_login(self):
         tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
         pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
@@ -101,30 +102,33 @@ class Login(unittest.TestCase):
     def test_login_four(self):
         '''用户名密码错误'''
         try:
-            # tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
-            # pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
-            # login = el_id_click(self.driver, cfg.get("login", "login"))
-            # self.assertIn('Username is required', el_text(self.driver, cfg.get("login", "subscribe_tip")))
-            pass
+            tel = el_send_keys(self.driver, cfg.get("login", "tel"), GL.login_username)
+            pwd = el_send_keys(self.driver, cfg.get("login", "pwd"), GL.login_password)
+            login = el_id_click(self.driver, cfg.get("login", "login"))
+            self.assertFalse(el_text(self.driver, cfg.get("login", "subscribe_tip")), "手机号或密码错误")
+            # self.assertIn('手机号或密码错误', el_text(self.driver, cfg.get("login", "subscribe_tip")))
+            # screenshot(self.driver, u'手机号或密码错误')
         except Exception as e:
-            screenshot(self.driver, u'用户名密码错误')
+            screenshot(self.driver, u'手机号或密码错误')
             raise e
 
 
-    # @classmethod
-    # def tearDownClass(self):
-    #     self.driver.quit()
+    @classmethod
+    def tearDownClass(self):
+        time.sleep(5)
+        self.driver.quit()
         
 
 
 # texture Testcase
-def suite_goods():
+def suite_login():
     tests = [
         "test_initial",
-        "test_start_login"
+        # "test_start_login",
+        "test_login_four"
 
     ]
     return unittest.TestSuite(map(Login, tests))
 
 if __name__ == "__main__":
-    unittest.TextTestRunner(verbosity=3).run(suite_goods())
+    unittest.TextTestRunner(verbosity=3).run(suite_login())

@@ -109,3 +109,4 @@ class MobileSwipe():
 
 if __name__ == "__main__":
     MobileSwipe()
+    # print(os.getcwd()) # 获取当前目录
