@@ -37,8 +37,9 @@ test_case_path=project_path+"\\src\\testsuite"
 
 
 # login_username = '13216628864'
-login_username = '13128662262'
-login_password = "a1234567"
+# login_username = '13128662262'
+login_username = ""
+login_password = ""
 
 
 

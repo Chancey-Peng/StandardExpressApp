@@ -25,30 +25,36 @@
 #     #     print(e)
 #     #     driver.keyevent(4)
 
-# import ddt
-# import unittest
-# @ddt.ddt
-# class DataTest(unittest.TestCase):
-#     def setUp(self):
-#         print("这是setUp")
-#
-#     def tearDown(self):
-#         print("这是tearDown")
-#
-#     def test_add(self,a,b):
-#         print(a+b)
-#
-#     @ddt.data(
-#         ["1","2"],
-#         ["3","4"],
-#         ["5","6"]
-#     )
-#     @ddt.unpack
-#     def test_add(self,a,b):
-#         print(a+b)
-#
-# if __name__ == '__main__':
-#     unittest.main()
+import ddt
+import unittest
+from src.common.excel_data import Excel
+from config import globalparameter as GL
+ex = Excel()
+excel_data = ex.read_excel(GL.test_data_path)
+@ddt.ddt
+class DataTest(unittest.TestCase):
+    def setUp(self):
+        print("这是setUp")
+
+    def tearDown(self):
+        print("这是tearDown")
+
+    def test_add(self,a,b):
+        print(a+b)
+
+    # @ddt.data(
+    #     ["1","2"],
+    #     ["3","4"],
+    #     ["5","6"]
+    # )
+    @ddt.data(*excel_data)
+    def test_add(self,excel_data):
+        # a,b,c,d,e,f,g,h,i,j,k,l = excel_data
+        # print(b,c)
+        print(excel_data['username'],excel_data['password'])
+
+if __name__ == '__main__':
+    unittest.main()
 #
 # import ddt
 # import unittest
